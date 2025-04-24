@@ -36,7 +36,7 @@ jobs:
         with:
           registry: ${{ env.GHCR_REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.MY_GITHUB_TOKEN }}
       # 元数据生成（适配双平台）
       - name: Extract metadata
         id: meta
