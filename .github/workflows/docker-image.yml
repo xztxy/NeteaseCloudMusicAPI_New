@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main  # 你可以根据实际默认分支修改，比如原来是 master 就改为 master
-    tags: [ 'v*.*.*' ]
+    tags: ['v*.*.*']
 env:
   DOCKERHUB_REGISTRY: docker.io
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -34,11 +34,11 @@ jobs:
           tags: |
             type=sha,prefix=commit-  # 基于提交哈希生成标签，前缀为 commit-
             type=ref,event=branch,branch=main,name=latest  # 为 main 分支打上 latest 标签
-            type=semver,pattern={{version}},enabled=false  # 暂时禁用语义化版本标签生成（如果不需要的话）
+            type=semver,pattern={{version}},enable=true  # 启用语义化版本标签生成
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context:.
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
